@@ -2,19 +2,22 @@ import React, { Fragment, useState } from "react";
 
 const EditTodo = ({ todo }) => {
     const [description, setDescription] = useState(todo.description);
-
+    const [count, setCount] = useState(+todo.count);
     //edit description function
 
     const updateDescription = async e => {
       e.preventDefault();
       try {
-        const body = { description };
+        const newBody = {
+          flag : true,
+          description : description, 
+        }
         const response = await fetch(
           `http://localhost:5000/todos/${todo.todo_id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
+            body: JSON.stringify(newBody)
           }
         );
 
